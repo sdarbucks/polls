@@ -55,5 +55,6 @@ models - 클래스(테이블) : Question
 >>> q.choice_set.all()
 <QuerySet [<Choice: 코믹>, <Choice: SF>, <Choice: 스릴러>]>
 
+...
 
 
