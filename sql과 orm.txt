@@ -1,0 +1,19 @@
+polls(사이트)
+  ▶ config
+  ▶ poll앱
+  ▶ templates
+    - poll 디렉터리
+  ▶ static
+    - poll
+
+sql과 orm
+
+삽입(insert)
+q = Question(question_text="백신", pup_date=timezone.now()d
+
+검색(select)
+- Question.objects.all() : 전체 조회
+- Question.objects.get(id=1) : 1개 조회
+
+삭제(delete)
+- q.delete()

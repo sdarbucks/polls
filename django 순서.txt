@@ -1,0 +1,59 @@
+작업 폴더 - webproject : polls(사이트) -poll(앱)
+가상화 폴더 - vense2 : mysite(장고 설치)
+
+작업하는 순서
+1. 가상화 폴더 진입(cmd) - cd c:/venvs2/mysite/Scripts -> activate
+2. 사이트 작업(cmd, 파이참) - cd c:/webproject/polls
+3. 서버 가동 - python manage.py runserver
+127.0.0.1:8000/poll
+관리자페이지 주소
+127.0.0.1:8000/admin
+
+DB - sqlite3
+models - 클래스(테이블) : Question
+테이블관리
+1) 장고 쉘 : python manage.py shell
+2) 관리자(admin)
+
+>>> from poll.models import Question, Choice
+>>> from django.utils import timezone
+>>> Question.objects.all()	// 질문 전체 조회
+<QuerySet [<Question: 당신이 접종한 백신은 무엇인가요?>, <Question: 당신의 취미는 무엇인가요?>]>
+
+>>> q1 = Question.objects.get(id=1)	// 1개 조회
+>>> q1.question_text
+'당신이 접종한 백신은 무엇인가요?'
+
+>>> q1.choice_set.all()
+<QuerySet [<Choice: 화이자>, <Choice: 얀센>, <Choice: 모더나>]>
+
+>>> q2 = Question.objects.get(id=2)	// 1개 조회
+>>> q2.choice_set.all()
+<QuerySet [<Choice: 영화감상>, <Choice: 운동>, <Choice: 컴퓨터 게임>, <Choice: 수영>]>
+
+>>> q3 = Question(question_text='당신이 좋아하는 영화 장르는 무엇인가요?', pub_date=timezone.now())
+>>> q3.save()
+>>> q3.id
+3
+
+>>> q3.question_text
+'당신이 좋아하는 영화 장르는 무엇인가요?'
+
+>>> ch = Choice(question=q3, choice_text='코믹', votes=0)
+>>> ch.save()
+>>> ch.choice_text
+'코믹'
+>>> ch = Choice(question=q3, choice_text='SF', votes=0)
+>>> ch.save()
+>>> ch = Choice(question=q3, choice_text='스릴러', votes=0)
+>>> ch.save()
+
+>>> q = Question.objects.get(id=3)
+>>> q.question_text
+'당신이 좋아하는 영화 장르는 무엇인가요?'
+
+>>> q.choice_set.all()
+<QuerySet [<Choice: 코믹>, <Choice: SF>, <Choice: 스릴러>]>
+
+
+
